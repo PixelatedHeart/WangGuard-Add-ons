@@ -41,6 +41,7 @@ function wangguard_registration_notice_activate() {
 
 	add_site_option('wangguard-notice-signup','');
 	add_site_option('wangguard-notice-signup-text','');
+	add_site_option('wangguard-notice-signup-text-css','');
 	update_site_option('wangguard-notice-signup','1');
 
 
@@ -71,6 +72,7 @@ function wangguard_save_registration_notices_fileds(){
 
 			update_site_option('wangguard-notice-signup', @$_POST['wangguard-notice-signup']=='1' ? 1 : 0 );
 			update_site_option('wangguard-notice-signup-text', @$_POST['wangguard-notice-signup-text']);
+			update_site_option('wangguard-notice-signup-text-css', @$_POST['wangguard-notice-signup-text-css']);
 
 			}
 add_action('wangguard_save_setting_option', 'wangguard_save_registration_notices_fileds');
@@ -97,16 +99,30 @@ function wangguard_registration_notices_fileds() { ?>
 						
 					}  ?></textarea>
 					</p>
+					
+					<strong><?php _e('Customized CSS for WordPress Multisite and BuddyPress Signup Page', 'wangguard-registration-add-on'); ?></strong><br />
+					
+					<p><textarea id="wangguard-notice-signup-text-css" name="wangguard-notice-signup-text-css" rows="9" cols="100"><?php if (!get_site_option('wangguard-notice-signup-text-css') || get_site_option('wangguard-notice-signup-text-css') == '') { ?>p.message.register{
+					text-align: center; 
+					font-weight:700; 
+					padding:10px; 
+					color:#333333;
+					background:#ffffe0;
+					border:1px solid #e6db55;
+		}
+										
+					<? } else {echo get_site_option('wangguard-notice-signup-text-css');}  ?></textarea>
+					</p>
 				<?php	}
 
 add_action('wangguard_setting','wangguard_registration_notices_fileds' );
 
 /********************************************************************/
-/*** ADD MESSAGE IN THE REGISTRATION FORM BEGINS **/
+/*** ADD MESSAGE IN THE WORDPRESS REGISTRATION FORM BEGINS **/
 /********************************************************************/
 
 
-function wangguard_signup_message($message){
+function wangguard_wp_signup_message($message){
 		if ( get_site_option('wangguard-notice-signup')=='1') {
 			if (strpos($message, 'register') !== FALSE) {
 				if  ( get_site_option('wangguard-notice-signup-text')!=='') {
@@ -122,10 +138,56 @@ function wangguard_signup_message($message){
 				return $message;
 				}
 			}
-add_action('login_message', 'wangguard_signup_message');	
+add_action('login_message', 'wangguard_wp_signup_message');	
 /********************************************************************/
-/*** ADD MESSAGE IN THE REGISTRATION FORM ENDS **/
+/*** ADD MESSAGE IN THE WORDPRESS REGISTRATION FORM ENDS **/
 /********************************************************************/
+
+/********************************************************************/
+/*** ADD MESSAGE IN THE WORDPRESS MULTISITE AND BUDDYPRESS REGISTRATION FORM BEGINS **/
+/********************************************************************/
+
+
+function wangguard_wpmu_signup_message(){
+		if ( get_site_option('wangguard-notice-signup')=='1') {
+				if  ( get_site_option('wangguard-notice-signup-text')!=='') {
+					$wggmessage = get_site_option('wangguard-notice-signup-text');
+					} else {
+						$wangguardlink = 'http://www.wangguard.com';
+						$wggmessage = __( 'This website is protected by <a href=' . $wangguardlink . '>WangGuard</a>, don\'t try to signup with a Proxy, VPN or TOR Network or you will be blocked', 'wangguard-registration-add-on'); 
+					}
+					}?>
+			<p class="message register"><?php echo $wggmessage; ?></p><?php
+		}
+add_action('before_signup_form', 'wangguard_wpmu_signup_message');
+add_action('template_notices', 'wangguard_wpmu_signup_message');
+
+/********************************************************************/
+/*** ADD MESSAGE IN THE WORDPRESS MULTISITE AND BUDDYPRESS REGISTRATION FORM ENDS **/
+/********************************************************************/
+
+/********************************************************************/
+/*** ADD CSS MESSAGE IN THE HEADERS **/
+/********************************************************************/
+
+function wangguard_wpmu_signup_message_style() {
+	if ( get_site_option('wangguard-notice-signup')=='1') {
+				if  ( get_site_option('wangguard-notice-signup-text-css')!=='') {
+					$wggmessagecss = get_site_option('wangguard-notice-signup-text-css');
+					} else {
+						$wggmessagecss = 'p.message.register{ text-align: center; font-weight:700; padding:10px; color:#333333; background:#ffffe0; border:1px solid #e6db55;}'; 
+					}
+					}?>
+	<style type="text/css">
+		<?php echo $wggmessagecss; ?>
+	</style>
+	<?php
+}
+if ( get_site_option('wangguard-notice-signup')=='1') add_action( 'wp_head', 'wangguard_wpmu_signup_message_style' );
+
+/********************************************************************/
+/*** ADD CSS MESSAGE IN THE HEADERS ENDS **/
+/********************************************************************/ 
 
 
 
