@@ -113,7 +113,7 @@ function wangguard_signup_message($message){
 					$wggmessage = get_site_option('wangguard-notice-signup-text');
 					} else {
 						$wangguardlink = 'http://www.wangguard.com';
-						$wggmessage = __( 'This website is protected by <a href=' . $wangguardlink . '>WangGuard</a>, don\'t try to signup with a Proxy, VPN or TOR Network or you will be blocked');
+						$wggmessage = __( 'This website is protected by <a href=' . $wangguardlink . '>WangGuard</a>, don\'t try to signup with a Proxy, VPN or TOR Network or you will be blocked', 'wangguard-registration-add-on');
 					}
 			return '<p class="message register">' . $wggmessage . '</p>';
 			}
