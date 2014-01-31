@@ -71,7 +71,7 @@ add_action('admin_notices', 'wangguard_registration_admin_notices');
 function wangguard_save_registration_notices_fileds(){
 
 			update_site_option('wangguard-notice-signup', @$_POST['wangguard-notice-signup']=='1' ? 1 : 0 );
-			update_site_option('wangguard-notice-signup-text', @$_POST['wangguard-notice-signup-text']);
+			update_site_option('wangguard-notice-signup-text', stripslashes(@$_POST['wangguard-notice-signup-text']));
 			update_site_option('wangguard-notice-signup-text-css', @$_POST['wangguard-notice-signup-text-css']);
 
 			}
