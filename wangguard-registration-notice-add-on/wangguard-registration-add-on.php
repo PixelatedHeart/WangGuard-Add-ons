@@ -1,6 +1,6 @@
 <?php
 /*
-Plugin Name: WangGuard Registration Nocice Add-on
+Plugin Name: WangGuard Registration Notice Add-on
 Plugin URI: http://www.wangguard.com
 Description: Add a notice in the Registration page. WangGuard plugin version 1.6 or higher is required, download it for free from <a href="http://wordpress.org/extend/plugins/wangguard/">http://wordpress.org/extend/plugins/wangguard/</a>.
 Version: 1.0.0
@@ -25,7 +25,14 @@ License: GPL2
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
+function wangguard_registration_notice_init() {
 
+if (function_exists('load_plugin_textdomain')) {
+		$plugin_dir = basename(dirname(__FILE__));
+		load_plugin_textdomain('wangguard-registration-add-on', false, $plugin_dir . "/languages/" );
+	}
+}
+add_action('init', 'wangguard_registration_notice_init');
 
 function wangguard_registration_admin_notices() {
 	if ( !defined('WANGGUARD_VERSION') ) {
@@ -44,7 +51,6 @@ function wangguard_registration_admin_notices() {
 }
 add_action('admin_notices', 'wangguard_registration_admin_notices');
 
-//function wangguard_registration_admin_notices_init() {
 
 // Save the new settings
 function wangguard_save_registration_notices_fileds(){
@@ -60,10 +66,10 @@ add_action('wangguard_save_setting_option', 'wangguard_save_registration_notices
 function wangguard_registration_notices_fileds() { ?>
 					<p>
 						<input type="checkbox" name="wangguard-notice-signup" id="wangguard-notice-signup" value="1" <?php echo wangguard_get_option("wangguard-notice-signup")=='1' ? 'checked' : ''?> />
-						<label for="wangguardexpertmode"><?php _e("<strong>Signup Notice.</strong><br/>By checking this option WangGuard will show a notice in the signup page. Below You can customize this notice", 'wangguard') ?></label>
+						<label for="wangguardexpertmode"><?php _e("<strong>Signup Notice.</strong><br/>By checking this option WangGuard will show a notice in the signup page. Below You can customize this notice", 'wangguard-registration-add-on') ?></label>
 					</p>
 					
-					<strong><?php _e('Customize notice in the signup page', 'wangguard'); ?></strong><br />
+					<strong><?php _e('Customize notice in the signup page', 'wangguard-registration-add-on'); ?></strong><br />
 					
 					<p><textarea id="wangguard-notice-signup-text" name="wangguard-notice-signup-text" rows="6" cols="100"><?php echo get_site_option('wangguard-notice-signup-text'); ?></textarea>
 					</p>
