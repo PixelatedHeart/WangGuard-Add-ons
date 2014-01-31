@@ -25,6 +25,8 @@ License: GPL2
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
+define('WANGGUARD_REGISTRATION_NOTICE', '1.0');
+
 function wangguard_registration_notice_init() {
 
 if (function_exists('load_plugin_textdomain')) {
@@ -33,6 +35,18 @@ if (function_exists('load_plugin_textdomain')) {
 	}
 }
 add_action('init', 'wangguard_registration_notice_init');
+
+function wangguard_registration_notice_activate() {
+
+
+	add_site_option('wangguard-notice-signup','');
+	add_site_option('wangguard-notice-signup-text','');
+	update_site_option('wangguard-notice-signup','1');
+
+
+}
+register_activation_hook( 'wangguard-registration-notice-add-on/wangguard-registration-add-on.php', 'wangguard_registration_notice_activate' );
+
 
 function wangguard_registration_admin_notices() {
 	if ( !defined('WANGGUARD_VERSION') ) {
@@ -64,14 +78,24 @@ add_action('wangguard_save_setting_option', 'wangguard_save_registration_notices
 
 //Add setting to WangGuard Setting page
 function wangguard_registration_notices_fileds() { ?>
-					<p>
-						<input type="checkbox" name="wangguard-notice-signup" id="wangguard-notice-signup" value="1" <?php echo wangguard_get_option("wangguard-notice-signup")=='1' ? 'checked' : ''?> />
+					<p>						
+						<input type="checkbox" name="wangguard-notice-signup" id="wangguard-notice-signup" value="1" <?php echo get_site_option("wangguard-notice-signup")=='1' ? 'checked' : ''?> />
+						
+						
 						<label for="wangguardexpertmode"><?php _e("<strong>Signup Notice.</strong><br/>By checking this option WangGuard will show a notice in the signup page. Below You can customize this notice", 'wangguard-registration-add-on') ?></label>
 					</p>
 					
 					<strong><?php _e('Customize notice in the signup page', 'wangguard-registration-add-on'); ?></strong><br />
 					
-					<p><textarea id="wangguard-notice-signup-text" name="wangguard-notice-signup-text" rows="6" cols="100"><?php echo get_site_option('wangguard-notice-signup-text'); ?></textarea>
+					<p><textarea id="wangguard-notice-signup-text" name="wangguard-notice-signup-text" rows="6" cols="100"><?php if (!get_site_option('wangguard-notice-signup-text') || get_site_option('wangguard-notice-signup-text') == '') {
+					$wangguardlink = 'http://www.wangguard.com';
+					_e( 'This website is protected by <a href=' . $wangguardlink . '>WangGuard</a>, don\'t try to signup with a Proxy, VPN or TOR Network or you will be blocked');
+										
+					} else {
+						
+						echo get_site_option('wangguard-notice-signup-text');
+						
+					}  ?></textarea>
 					</p>
 				<?php	}
 
@@ -83,21 +107,21 @@ add_action('wangguard_setting','wangguard_registration_notices_fileds' );
 
 
 function wangguard_signup_message($message){
-		if ( get_site_option("wangguard-notice-signup")=='1') {
-		if (strpos($message, 'register') !== FALSE) {
-			if  ( get_site_option("wangguard-notice-signup-text")!=='') {
-				$wggmessage = get_site_option("wangguard-notice-signup-text");
-			} else {
-			$wggmessage = "This website is protected by <a href='http://www.wangguard.com/'>WangGuard</a>, don’t try to
-signup with a Proxy, VPN or TOR Network or you will be blocked.";
-				}
+		if ( get_site_option('wangguard-notice-signup')=='1') {
+			if (strpos($message, 'register') !== FALSE) {
+				if  ( get_site_option('wangguard-notice-signup-text')!=='') {
+					$wggmessage = get_site_option('wangguard-notice-signup-text');
+					} else {
+						$wangguardlink = 'http://www.wangguard.com';
+						$wggmessage = __( 'This website is protected by <a href=' . $wangguardlink . '>WangGuard</a>, don\'t try to signup with a Proxy, VPN or TOR Network or you will be blocked');
+					}
 			return '<p class="message register">' . $wggmessage . '</p>';
+			}
 		}
-		else {
-			return $message;
-		}
-	}
-	}
+			else {
+				return $message;
+				}
+			}
 add_action('login_message', 'wangguard_signup_message');	
 /********************************************************************/
 /*** ADD MESSAGE IN THE REGISTRATION FORM ENDS **/
