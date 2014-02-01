@@ -144,7 +144,7 @@ add_action('login_message', 'wangguard_wp_signup_message');
 /********************************************************************/
 
 /********************************************************************/
-/*** ADD MESSAGE IN THE WORDPRESS MULTISITE AND BUDDYPRESS REGISTRATION FORM BEGINS **/
+/*** ADD MESSAGE IN THE WORDPRESS MULTISITE REGISTRATION FORM BEGINS **/
 /********************************************************************/
 
 
@@ -155,15 +155,28 @@ function wangguard_wpmu_signup_message(){
 					} else {
 						$wangguardlink = 'http://www.wangguard.com';
 						$wggmessage = __( 'This website is protected by <a href=' . $wangguardlink . '>WangGuard</a>, don\'t try to signup with a Proxy, VPN or TOR Network or you will be blocked', 'wangguard-registration-add-on'); 
-					}
 					}?>
 			<p class="message register"><?php echo $wggmessage; ?></p><?php
+					}
 		}
 add_action('before_signup_form', 'wangguard_wpmu_signup_message');
-add_action('template_notices', 'wangguard_wpmu_signup_message');
+
 
 /********************************************************************/
-/*** ADD MESSAGE IN THE WORDPRESS MULTISITE AND BUDDYPRESS REGISTRATION FORM ENDS **/
+/*** ADD MESSAGE IN THE WORDPRESS MULTISITE FORM ENDS **/
+/********************************************************************/
+
+/********************************************************************/
+/*** ADD MESSAGE IN THE WORDPRESS BUDDYPRESS REGISTRATION FORM BEGINS **/
+/********************************************************************/
+
+function wangguard_bp_signup_notice_code() {
+    require( dirname( __FILE__ ) . '/wangguard-notice-signup-bp.php' );
+}
+add_action( 'bp_include', 'wangguard_bp_signup_notice_code' );
+
+/********************************************************************/
+/*** ADD MESSAGE IN THE WORDPRESS BUDDYPRESS REGISTRATION FORM BEGINS **/
 /********************************************************************/
 
 /********************************************************************/
