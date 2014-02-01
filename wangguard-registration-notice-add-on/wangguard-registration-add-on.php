@@ -121,7 +121,6 @@ add_action('wangguard_setting','wangguard_registration_notices_fileds' );
 /*** ADD MESSAGE IN THE WORDPRESS REGISTRATION FORM BEGINS **/
 /********************************************************************/
 
-
 function wangguard_wp_signup_message($message){
 		if ( get_site_option('wangguard-notice-signup')=='1') {
 			if (strpos($message, 'register') !== FALSE) {
@@ -139,6 +138,7 @@ function wangguard_wp_signup_message($message){
 				}
 			}
 add_action('login_message', 'wangguard_wp_signup_message');	
+
 /********************************************************************/
 /*** ADD MESSAGE IN THE WORDPRESS REGISTRATION FORM ENDS **/
 /********************************************************************/
@@ -146,7 +146,6 @@ add_action('login_message', 'wangguard_wp_signup_message');
 /********************************************************************/
 /*** ADD MESSAGE IN THE WORDPRESS MULTISITE REGISTRATION FORM BEGINS **/
 /********************************************************************/
-
 
 function wangguard_wpmu_signup_message(){
 		if ( get_site_option('wangguard-notice-signup')=='1') {
@@ -160,7 +159,6 @@ function wangguard_wpmu_signup_message(){
 					}
 		}
 add_action('before_signup_form', 'wangguard_wpmu_signup_message');
-
 
 /********************************************************************/
 /*** ADD MESSAGE IN THE WORDPRESS MULTISITE FORM ENDS **/
@@ -176,11 +174,21 @@ function wangguard_bp_signup_notice_code() {
 add_action( 'bp_include', 'wangguard_bp_signup_notice_code' );
 
 /********************************************************************/
-/*** ADD MESSAGE IN THE WORDPRESS BUDDYPRESS REGISTRATION FORM BEGINS **/
+/*** ADD MESSAGE IN THE WORDPRESS BUDDYPRESS REGISTRATION FORM ENDS **/
 /********************************************************************/
 
 /********************************************************************/
-/*** ADD CSS MESSAGE IN THE HEADERS **/
+/*** ADD MESSAGE IN THE WOOCOMMERCE MY ACCOUNT FORM BEGINS **/
+/********************************************************************/
+
+if (get_site_option('woocommerce_enable_myaccount_registration')=='yes') add_action('woocommerce_before_customer_login_form', 'wangguard_wpmu_signup_message');
+
+/********************************************************************/
+/*** ADD MESSAGE IN THE WOOCOMMERCE MY ACCOUNT FORM ENDS **/
+/********************************************************************/
+
+/********************************************************************/
+/*** ADD CSS MESSAGE IN THE HEADERS BEGINS **/
 /********************************************************************/
 
 function wangguard_wpmu_signup_message_style() {
@@ -189,19 +197,16 @@ function wangguard_wpmu_signup_message_style() {
 					$wggmessagecss = get_site_option('wangguard-notice-signup-text-css');
 					} else {
 						$wggmessagecss = 'p.message.register{ text-align: center; font-weight:700; padding:10px; color:#333333; background:#ffffe0; border:1px solid #e6db55;}'; 
-					}
+						}
 					}?>
 	<style type="text/css">
 		<?php echo $wggmessagecss; ?>
 	</style>
-	<?php
+<?php
 }
 if ( get_site_option('wangguard-notice-signup')=='1') add_action( 'wp_head', 'wangguard_wpmu_signup_message_style' );
 
 /********************************************************************/
 /*** ADD CSS MESSAGE IN THE HEADERS ENDS **/
 /********************************************************************/ 
-
-
-
 ?>
