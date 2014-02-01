@@ -7,21 +7,18 @@ Tested up to: 3.8
 Stable tag: 1.0.0
 License: GPLv2
 
-WangGuard Registration Nocice Add-on is an Add-on for WangGuard plugin. You can add a Notice in the regostration page.
+WangGuard Registration Nocice Add-on is an Add-on for WangGuard plugin. You can add a Notice in the registration page.
 
 
 == Description ==
 
-With this WangGuard Add-on, you can add a Notice in the registration page. It is compatible with WordPress, WordPress Multisite and BuddyPress.
+With this WangGuard Add-on, you can add a Notice in the registration page. It is compatible with WordPress, WordPress Multisite, BuddyPress and WooCommerce.
 
 [WangGuard plugin](http://wordpress.org/extend/plugins/wangguard) version 1.6+ is needed
 
 = Why use WangGuard Registration Nocice Add-on? =
 
-We detected that many sploggers and spam users avoid website with WangGuard plugin, so Why dont notice that you are using it?
-
-
-
+We have detected that many sploggers and spam users avoid website with WangGuard plugin, so Why don't notice that you are using it?
 
 
 == Installation ==
