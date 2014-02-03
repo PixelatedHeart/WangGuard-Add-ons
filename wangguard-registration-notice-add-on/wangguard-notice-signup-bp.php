@@ -1,4 +1,15 @@
-<?php
+<?PHP
+/**
+ * Add BP Menssage
+ *
+ * @author 		WangGuard
+ * @package 	WangGuard/Add-on
+ * @version     1.0
+ */
+
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+
+
 function wangguard_bp_signup_message(){
 		if ( bp_is_register_page() ) {
 			if ( get_site_option('wangguard-notice-signup')=='1') {
