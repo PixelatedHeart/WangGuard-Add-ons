@@ -105,7 +105,7 @@ add_action('wangguard_setting','wangguard_limit_domain_regisration_fileds' );
 /*** ADD MESSAGE IN THE WORDPRESS REGISTRATION FORM BEGINS **/
 /********************************************************************/
 
-function wangguard_limit_domain_registration_blocked_allowed_add_on($user_name, $user_email, $errors){
+function wangguard_limit_domain_registration_blocked_add_on($user_name, $user_email, $errors){
         
         $blocked = wangguard_is_domain_blocked_add_on($user_email);
 		
@@ -114,8 +114,19 @@ function wangguard_limit_domain_registration_blocked_allowed_add_on($user_name, 
 			return;
         }       
 }
+
+function wangguard_limit_domain_registration_allowed_add_on($user_name, $user_email, $errors){
+        
+       $allowed = wangguard_is_domain_allowed_add_on($user_email);
+		
+		if ($allowed == false) {
+			$errors->add('user_email',   __('<strong>ERROR</strong>: Domain not allowed.', 'wangguard'));
+			return;
+        }       
+}
 //add_action('wangguard_wp_signup_validate', 'wangguard_limit_domain_regisration_blocked_allowed_add_on');
-add_action('register_post', 'wangguard_limit_domain_registration_blocked_allowed_add_on',10,3);
+add_action('register_post', 'wangguard_limit_domain_registration_blocked_add_on',10,3);
+add_action('register_post', 'wangguard_limit_domain_registration_allowed_add_on',10,3);
 
 
 /********************************************************************/
@@ -159,15 +170,26 @@ add_action('register_post', 'wangguard_limit_domain_registration_blocked_allowed
 function wangguard_is_domain_blocked_add_on($email){
 	$parts = explode("@", $email);
 	$domain = strtolower($parts[1]);
-	//if email is not well formed, return TRUE, this should never happens as WP already checks for a valid email format
-	$array = get_site_option('wangguard_banned_email_domains'); 
-	foreach ($array as $key => $value) {$array[$key] = trim ($value);} 
+	$arraybanneddomains = get_site_option('wangguard_banned_email_domains'); 
+	foreach ($arraybanneddomains as $key => $value) {$arraybanneddomains[$key] = trim ($value);} 
 	$search_for = $domain; 
-	if (array_search ($search_for, $array, true)===false) {
+	if (array_search ($search_for, $arraybanneddomains, true)===false) {
 				return false;
 				} else {
 					return true;
 				}
 }
 
+function wangguard_is_domain_allowed_add_on($email){
+	$parts = explode("@", $email);
+	$domain = strtolower($parts[1]);
+	$arrayalloweddomains = get_site_option('wangguard_limited_email_domains'); 
+	foreach ($arrayalloweddomains as $key => $value) {$arrayalloweddomains[$key] = trim ($value);} 
+	$search_for = $domain; 
+	if (array_search ($search_for, $arrayalloweddomains, true)===false) {
+				return false;
+				} else {
+					return true;
+				}
+}
 ?>
