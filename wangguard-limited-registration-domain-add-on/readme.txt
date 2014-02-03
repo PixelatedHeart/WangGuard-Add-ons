@@ -1,7 +1,7 @@
 === WangGuard Limited Registration Domain Add-On ===
 Contributors: j.conti
 Author URI: http://wangguard.com
-Tags: wangguard, wgg, wangguardaddon, registration, notice, registration notice, buddypress
+Tags: wangguard, wgg, wangguardaddon, registration, block domains, allow domains, domains, buddypress
 Requires at least: 3.8
 Tested up to: 3.8
 Stable tag: 1.0.0
