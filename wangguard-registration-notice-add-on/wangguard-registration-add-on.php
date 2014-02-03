@@ -80,6 +80,7 @@ add_action('wangguard_save_setting_option', 'wangguard_save_registration_notices
 
 //Add setting to WangGuard Setting page
 function wangguard_registration_notices_fileds() { ?>
+					<h3>Registration Notice</h3>
 					<p>						
 						<input type="checkbox" name="wangguard-notice-signup" id="wangguard-notice-signup" value="1" <?php echo get_site_option("wangguard-notice-signup")=='1' ? 'checked' : ''?> />
 						
@@ -181,7 +182,7 @@ add_action( 'bp_include', 'wangguard_bp_signup_notice_code' );
 /*** ADD MESSAGE IN THE WOOCOMMERCE MY ACCOUNT FORM BEGINS **/
 /********************************************************************/
 
-if (get_site_option('woocommerce_enable_myaccount_registration')=='yes') add_action('woocommerce_before_customer_login_form', 'wangguard_wpmu_signup_message');
+if (get_option('woocommerce_enable_myaccount_registration')=='yes') add_action('woocommerce_before_customer_login_form', 'wangguard_wpmu_signup_message');
 
 /********************************************************************/
 /*** ADD MESSAGE IN THE WOOCOMMERCE MY ACCOUNT FORM ENDS **/
