@@ -85,7 +85,7 @@ add_action('wangguard_save_setting_option', 'wangguard_save_limit_domain_regisra
 function wangguard_limit_domain_regisration_fileds() { ?>
 					<h3>Limited-Banned Domains</h3>
 					<p>
-						<label for="wangguard_limited_email_domains"><?php _e( 'Limited Email Registrations. One per line', 'wangguard-registration-add-on' ) ?></label><br />
+						<label for="wangguard_limited_email_domains"><?php _e( 'Limited Email Domains Registrations. One per line', 'wangguard-registration-add-on' ) ?></label><br />
 
 						<?php $wangguard_limited_email_domains = get_site_option( 'wangguard_limited_email_domains' );
 						$wangguard_limited_email_domains = str_replace( ' ', "\n", $wangguard_limited_email_domains ); ?>
@@ -116,13 +116,14 @@ function wangguard_limit_domain_registration_blocked_add_on($user_name, $user_em
 }
 
 function wangguard_limit_domain_registration_allowed_add_on($user_name, $user_email, $errors){
-        
-       $allowed = wangguard_is_domain_allowed_add_on($user_email);
-		
-		if ($allowed == false) {
-			$errors->add('user_email',   __('<strong>ERROR</strong>: Domain not allowed.', 'wangguard-registration-add-on'));
-			return;
-        }       
+       $domains = array_filter(get_site_option( 'wangguard_limited_email_domains'));
+       		if (!empty($domains)){
+			   				$allowed = wangguard_is_domain_allowed_add_on($user_email);
+			   				if ($allowed == false) {
+				   					$errors->add('user_email',   __('<strong>ERROR</strong>: Domain not whitelisted.', 'wangguard-registration-add-on'));
+				   					return;
+				   				}     
+				   	}
 }
 //add_action('wangguard_wp_signup_validate', 'wangguard_limit_domain_regisration_blocked_allowed_add_on');
 add_action('register_post', 'wangguard_limit_domain_registration_blocked_add_on',10,3);
