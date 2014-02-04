@@ -48,7 +48,7 @@ register_activation_hook( 'wangguard-limited-registration-domain-add-on/wangguar
 function wangguard_limit_domain_regisration_notices() {
 	if ( !defined('WANGGUARD_VERSION') ) {
 		echo "
-		<div  class='updated fade'><p><strong>".__('WangGuard Limited Registration Domain Add-On is almost ready.', 'wangguard-registration-add-on')."</strong> ". __('You must install and activate <a href="http://wordpress.org/extend/plugins/wangguard/">WangGuard</a> 1.6 or higher to use this plugin.', 'wangguard-registration-add-on')."</p></div>
+		<div  class='error fade'><p><strong>".__('WangGuard Limited Registration Domain Add-On is almost ready.', 'wangguard-registration-add-on')."</strong> ". __('You must install and activate <a href="http://wordpress.org/extend/plugins/wangguard/">WangGuard</a> 1.6 or higher to use this plugin.', 'wangguard-registration-add-on')."</p></div>
 		";
 	}
 	else {
@@ -56,7 +56,7 @@ function wangguard_limit_domain_regisration_notices() {
 		if ($version)
 		if (version_compare($version , '1.6') == -1)
 			echo "
-			<div  class='updated fade'><p><strong>".__('WangGuard Limited Registration Domain Add-On is almost ready.', 'wangguard-registration-add-on')."</strong> ". __('You need to upgrade <a href="http://wordpress.org/extend/plugins/wangguard/">WangGuard</a> to version 1.6 or higher to use this plugin.', 'wangguard-registration-add-on')."</p></div>
+			<div  class='error fade'><p><strong>".__('WangGuard Limited Registration Domain Add-On is almost ready.', 'wangguard-registration-add-on')."</strong> ". __('You need to upgrade <a href="http://wordpress.org/extend/plugins/wangguard/">WangGuard</a> to version 1.6 or higher to use this plugin.', 'wangguard-registration-add-on')."</p></div>
 			";
 	}
 }
@@ -102,7 +102,7 @@ function wangguard_limit_domain_regisration_fileds() { ?>
 add_action('wangguard_setting','wangguard_limit_domain_regisration_fileds' );
 
 /********************************************************************/
-/*** ADD MESSAGE IN THE WORDPRESS REGISTRATION FORM BEGINS **/
+/*** CHECK DOMAINS IN THE WORDPRESS REGISTRATION FORM BEGINS **/
 /********************************************************************/
 
 function wangguard_limit_domain_registration_blocked_add_on($user_name, $user_email, $errors){
@@ -128,9 +128,8 @@ function wangguard_limit_domain_registration_allowed_add_on($user_name, $user_em
 add_action('register_post', 'wangguard_limit_domain_registration_blocked_add_on',10,3);
 add_action('register_post', 'wangguard_limit_domain_registration_allowed_add_on',10,3);
 
-
 /********************************************************************/
-/*** ADD MESSAGE IN THE WORDPRESS REGISTRATION FORM ENDS **/
+/*** CHECK DOMAINS IN THE WORDPRESS REGISTRATION FORM ENDS **/
 /********************************************************************/
 
 /********************************************************************/
@@ -142,15 +141,18 @@ add_action('register_post', 'wangguard_limit_domain_registration_allowed_add_on'
 /********************************************************************/
 
 /********************************************************************/
-/*** ADD MESSAGE IN THE WORDPRESS BUDDYPRESS REGISTRATION FORM BEGINS **/
+/*** CHECK DOMAINS IN THE WORDPRESS BUDDYPRESS REGISTRATION FORM BEGINS **/
 /********************************************************************/
 
-
+function wangguard_bp_registration_domain_code() {
+    require( dirname( __FILE__ ) . '/wangguard-limited-registration-domain-bp.php' );
+}
+add_action( 'bp_include', 'wangguard_bp_registration_domain_code' );
 
 
 
 /********************************************************************/
-/*** ADD MESSAGE IN THE WORDPRESS BUDDYPRESS REGISTRATION FORM ENDS **/
+/*** CHECK DOMAINS IN THE WORDPRESS BUDDYPRESS REGISTRATION FORM ENDS **/
 /********************************************************************/
 
 /********************************************************************/
@@ -166,6 +168,9 @@ add_action('register_post', 'wangguard_limit_domain_registration_allowed_add_on'
 /*** ADD MESSAGE IN THE WOOCOMMERCE MY ACCOUNT FORM ENDS **/
 /********************************************************************/
 
+/********************************************************************/
+/*** LOOK FOR DOMAINS BEGINS **/
+/********************************************************************/
 
 function wangguard_is_domain_blocked_add_on($email){
 	$parts = explode("@", $email);
@@ -192,4 +197,8 @@ function wangguard_is_domain_allowed_add_on($email){
 					return true;
 				}
 }
+
+/********************************************************************/
+/*** LOOK FOR DOMAINS ENDS **/
+/********************************************************************/
 ?>
