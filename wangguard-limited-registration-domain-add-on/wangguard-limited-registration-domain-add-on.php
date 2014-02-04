@@ -85,7 +85,7 @@ add_action('wangguard_save_setting_option', 'wangguard_save_limit_domain_regisra
 function wangguard_limit_domain_regisration_fileds() { ?>
 					<h3>Limited-Banned Domains</h3>
 					<p>
-						<label for="wangguard_limited_email_domains"><?php _e( 'Limited Email Registrations. One per line' ) ?></label><br />
+						<label for="wangguard_limited_email_domains"><?php _e( 'Limited Email Registrations. One per line', 'wangguard-registration-add-on' ) ?></label><br />
 
 						<?php $wangguard_limited_email_domains = get_site_option( 'wangguard_limited_email_domains' );
 						$wangguard_limited_email_domains = str_replace( ' ', "\n", $wangguard_limited_email_domains ); ?>
@@ -93,7 +93,7 @@ function wangguard_limit_domain_regisration_fileds() { ?>
 					</p>
 					
 					<p>
-						<label for="wangguard_banned_email_domains"><?php _e('Banned Email Domains. One domain per line.') ?></label><br />
+						<label for="wangguard_banned_email_domains"><?php _e('Banned Email Domains. One domain per line.', 'wangguard-registration-add-on') ?></label><br />
 				<td>
 					<textarea name="wangguard_banned_email_domains" id="wangguard_banned_email_domains" cols="45" rows="5"><?php echo esc_textarea( get_site_option( 'wangguard_banned_email_domains' ) == '' ? '' : implode( "\n", (array) get_site_option( 'wangguard_banned_email_domains' ) ) ); ?></textarea>
 					</p>
@@ -110,7 +110,7 @@ function wangguard_limit_domain_registration_blocked_add_on($user_name, $user_em
         $blocked = wangguard_is_domain_blocked_add_on($user_email);
 		
 		if ($blocked) {
-			$errors->add('user_email',   __('<strong>ERROR</strong>: Domain not allowed.', 'wangguard'));
+			$errors->add('user_email',   __('<strong>ERROR</strong>: Domain not allowed.', 'wangguard-registration-add-on'));
 			return;
         }       
 }
@@ -120,7 +120,7 @@ function wangguard_limit_domain_registration_allowed_add_on($user_name, $user_em
        $allowed = wangguard_is_domain_allowed_add_on($user_email);
 		
 		if ($allowed == false) {
-			$errors->add('user_email',   __('<strong>ERROR</strong>: Domain not allowed.', 'wangguard'));
+			$errors->add('user_email',   __('<strong>ERROR</strong>: Domain not allowed.', 'wangguard-registration-add-on'));
 			return;
         }       
 }
@@ -156,16 +156,34 @@ add_action( 'bp_include', 'wangguard_bp_registration_domain_code' );
 /********************************************************************/
 
 /********************************************************************/
-/*** ADD MESSAGE IN THE WOOCOMMERCE MY ACCOUNT FORM BEGINS **/
+/*** CHECK DOMAINS IN THE WOOCOMMERCE MY ACCOUNT FORM BEGINS **/
 /********************************************************************/
+function wangguard_limit_domain_registration_blocked_woocommerce_add_on($user_name, $email, $errors){
 
+		$user_email = $_POST['email'];
+        
+        $blocked = wangguard_is_domain_blocked_add_on($user_email);
+		
+		if ($blocked) {
+			$errors->add('user_email',   __('<strong>ERROR</strong>: Domain not allowed.', 'wangguard-registration-add-on'));
+			return;
+        }       
+}
 
-
-
-
-
+function wangguard_limit_domain_registration_allowed_woocommerce_add_on($user_name, $email, $errors){
+        
+       $user_email = $_POST['email'];
+       
+       $allowed = wangguard_is_domain_allowed_add_on($user_email);
+		
+		if ($allowed == false) {
+			$errors->add('user_email',   __('<strong>ERROR</strong>: Domain not allowed.', 'wangguard-registration-add-on'));
+			return;
+        }       
+}
+if (get_option('woocommerce_enable_myaccount_registration')=='yes') add_action('woocommerce_before_customer_login_form', 'wangguard_wpmu_signup_message');
 /********************************************************************/
-/*** ADD MESSAGE IN THE WOOCOMMERCE MY ACCOUNT FORM ENDS **/
+/*** CHECK DOMAINS IN THE WOOCOMMERCE MY ACCOUNT FORM ENDS **/
 /********************************************************************/
 
 /********************************************************************/
