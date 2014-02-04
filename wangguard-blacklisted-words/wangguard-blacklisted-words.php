@@ -130,9 +130,9 @@ add_action('register_post', 'wangguard_blacklisted_words_add_on_check_email',10,
 /********************************************************************/
 
 function wangguard_bp_blacklisted_words_code() {
-    require( dirname( __FILE__ ) . '/wangguard-limited-registration-domain-bp.php' );
+    require( dirname( __FILE__ ) . '/wangguard-blacklisted-words-bp.php' );
 }
-//add_action( 'bp_include', 'wangguard_bp_blacklisted_words_code' );
+add_action( 'bp_include', 'wangguard_bp_blacklisted_words_code' );
 
 
 
