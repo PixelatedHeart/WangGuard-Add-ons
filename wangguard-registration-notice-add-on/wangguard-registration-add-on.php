@@ -52,7 +52,7 @@ register_activation_hook( 'wangguard-registration-notice-add-on/wangguard-regist
 function wangguard_registration_admin_notices() {
 	if ( !defined('WANGGUARD_VERSION') ) {
 		echo "
-		<div  class='updated fade'><p><strong>".__('WangGuard Registration Nocice Add-on is almost ready.', 'wangguard-registration-add-on')."</strong> ". __('You must install and activate <a href="http://wordpress.org/extend/plugins/wangguard/">WangGuard</a> 1.6 or higher to use this plugin.', 'wangguard-registration-add-on')."</p></div>
+		<div  class='error fade'><p><strong>".__('WangGuard Registration Nocice Add-on is almost ready.', 'wangguard-registration-add-on')."</strong> ". __('You must install and activate <a href="http://wordpress.org/extend/plugins/wangguard/">WangGuard</a> 1.6 or higher to use this plugin.', 'wangguard-registration-add-on')."</p></div>
 		";
 	}
 	else {
@@ -60,7 +60,7 @@ function wangguard_registration_admin_notices() {
 		if ($version)
 		if (version_compare($version , '1.6') == -1)
 			echo "
-			<div  class='updated fade'><p><strong>".__('WangGuard Registration Nocice Add-on is almost ready.', 'wangguard-registration-add-on')."</strong> ". __('You need to upgrade <a href="http://wordpress.org/extend/plugins/wangguard/">WangGuard</a> to version 1.6 or higher to use this plugin.', 'wangguard-registration-add-on')."</p></div>
+			<div  class='error fade'><p><strong>".__('WangGuard Registration Nocice Add-on is almost ready.', 'wangguard-registration-add-on')."</strong> ". __('You need to upgrade <a href="http://wordpress.org/extend/plugins/wangguard/">WangGuard</a> to version 1.6 or higher to use this plugin.', 'wangguard-registration-add-on')."</p></div>
 			";
 	}
 }
