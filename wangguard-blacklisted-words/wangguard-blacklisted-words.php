@@ -121,6 +121,9 @@ add_action('register_post', 'wangguard_blacklisted_words_add_on_check_email',10,
 /*** ADD MESSAGE IN THE WORDPRESS MULTISITE REGISTRATION FORM BEGINS **/
 /********************************************************************/
 
+if (is_multisite()) {
+		require( dirname( __FILE__ ) . '/wangguard-blacklisted-words-wpmu.php' );
+	}
 
 
 /********************************************************************/
