@@ -137,9 +137,9 @@ add_action('register_post', 'wangguard_limit_domain_registration_allowed_add_on'
 /*** ADD MESSAGE IN THE WORDPRESS MULTISITE REGISTRATION FORM BEGINS **/
 /********************************************************************/
 
-
-
-/********************************************************************/
+if (is_multisite()) {
+		require( dirname( __FILE__ ) . '/wangguard-limited-registration-domain-wpmu.php' );
+	}
 
 /********************************************************************/
 /*** CHECK DOMAINS IN THE WORDPRESS BUDDYPRESS REGISTRATION FORM BEGINS **/
