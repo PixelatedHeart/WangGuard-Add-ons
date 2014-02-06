@@ -171,7 +171,6 @@ function wangguard_look_for_bl_word($words){
 	$low_words = strtolower($words); 
 		foreach ($blacklistedwords as $key => $blacklistedword) {
 			$searchword = "/".$blacklistedword."/i";
-			echo $searchword;
 			if (preg_match($searchword, $low_words)) {
 				return true;
 			}
