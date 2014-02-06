@@ -9,9 +9,9 @@
 
 function wangguard_blacklisted_words_wpmu_user_name($result) {
 
-	
-		$words = array_filter(get_site_option( 'wangguard_blacklisted_words_list'));
+	$words = array_filter(get_site_option( 'wangguard_blacklisted_words_list'));
        		if (!empty($words)){
+
 		$user_name = $_POST['user_name'];
 
 		//check domain against the list of selected blocked domains
@@ -23,8 +23,8 @@ function wangguard_blacklisted_words_wpmu_user_name($result) {
 		
 		return $result;
 	}
-}
 
+}
 function wangguard_blacklisted_words_wpmu_user_email($result) {
 
 	$words = array_filter(get_site_option( 'wangguard_blacklisted_words_list'));
@@ -80,7 +80,7 @@ function wangguard_blacklisted_words_wpmu_blog_title($result) {
 
 $words = array_filter(get_site_option( 'wangguard_blacklisted_words_list'));
        		if (!empty($words)){
-       			add_filter('wpmu_validate_user_signup', 'wangguard_blacklisted_words_wpmu_user_name',120);
+       			add_filter('wpmu_validate_user_signup', 'wangguard_blacklisted_words_wpmu_user_name',99);
 	   			add_filter('wpmu_validate_user_signup', 'wangguard_blacklisted_words_wpmu_user_email',130);
 	   			add_filter('wpmu_validate_blog_signup', 'wangguard_blacklisted_words_wpmu_blogname',90);
 	   			add_filter('wpmu_validate_blog_signup', 'wangguard_blacklisted_words_wpmu_blog_title',100);

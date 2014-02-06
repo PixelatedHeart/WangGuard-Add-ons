@@ -167,19 +167,16 @@ if (get_option('woocommerce_enable_myaccount_registration')=='yes') add_action('
 /********************************************************************/
 
 function wangguard_look_for_bl_word($words){
-	$low_words = strtolower($words);
-	$blacklistedwords = get_site_option('wangguard_blacklisted_words_list'); 
+	$blacklistedwords = array_filter(array_map('trim', get_site_option('wangguard_blacklisted_words_list')));
+	$low_words = strtolower($words); 
 		foreach ($blacklistedwords as $key => $blacklistedword) {
-			$word = strpos($low_words,$blacklistedword);
-			if($word !== false){
+			$searchword = "/".$blacklistedword."/i";
+			echo $searchword;
+			if (preg_match($searchword, $low_words)) {
 				return true;
 			}
-			else{
-				return false;
-				}
-		}
+		} return false;
 }
-
 /********************************************************************/
 /*** LOOK FOR WORDS ENDS **/
 /********************************************************************/
