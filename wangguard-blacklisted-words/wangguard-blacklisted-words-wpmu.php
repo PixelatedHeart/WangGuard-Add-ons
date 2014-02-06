@@ -145,7 +145,7 @@ function wangguard_sent_notice_email_blacklisted_word_used_mu($website_name, $si
 	$headers .= "Content-Transfer-Encoding: 8bit\n";
 	$message = "<p>Hi ".$network_name.",</p>
 <p><br />The website <a href='".$siteurl."'>".$website_name."</a> has used a blacklisted word.</p>
-<p>You can see the post here: <a href=". $permanlink_post."'>".$post_title."</a></p>
+<p>You can see the post here: <a href=". $permanlink_post.">".$post_title."</a></p>
 <p>&nbsp;</p>
 <p>The WangGuard Team<br />
 <a href='http://www.wangguard.com/'>WangGuard</a>";
