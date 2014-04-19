@@ -29,14 +29,14 @@ function wangguard_limit_domain_registration_mu_allowed_add_on($result) {
 			   	return $result;
 			  }
 }
-$domanbanned = array_filter(get_site_option( 'wangguard_banned_email_domains'));
-$domainslimited = array_filter(get_site_option( 'wangguard_limited_email_domains'));
+if ( get_site_option( 'wangguard_banned_email_domains') && get_site_option( 'wangguard_limited_email_domains') ){
+	$domanbanned = array_filter(get_site_option( 'wangguard_banned_email_domains'));
+	$domainslimited = array_filter(get_site_option( 'wangguard_limited_email_domains'));
        		if (!empty($domanbanned)){
-
-add_filter('wpmu_validate_user_signup', 'wangguard_limit_domain_registration_mu_blocked_add_on', 100);
-}
-
-       		if (!empty($domainslimited)){
-add_filter('wpmu_validate_user_signup', 'wangguard_limit_domain_registration_mu_allowed_add_on', 110);
+		   			add_filter('wpmu_validate_user_signup', 'wangguard_limit_domain_registration_mu_blocked_add_on', 100);
+		   		}
+		   	if (!empty($domainslimited)){
+			   		add_filter('wpmu_validate_user_signup', 'wangguard_limit_domain_registration_mu_allowed_add_on', 110);
+			   	}
 }
 ?>

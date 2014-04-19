@@ -7,6 +7,12 @@
  * @version     1.0
  */
 
+
+//We need to remove the WMPU filters because with BP 2.0 breaks the signup page.
+
+remove_filter('wpmu_validate_user_signup', 'wangguard_limit_domain_registration_mu_blocked_add_on', 100);
+remove_filter('wpmu_validate_user_signup', 'wangguard_limit_domain_registration_mu_allowed_add_on', 110);
+
 function wangguard_limit_domain_registration_bp_blocked_add_on(){
 		global $bp;
 		
