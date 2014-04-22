@@ -37,9 +37,12 @@ No screenshots
 
 == Frequently Asked Questions ==
 
+= How to use it? =
+
+It's easy, go to WangGuard -> WangGuard settings and add your Allowed / Blocked domains.
 
 == Changelog ==
 
-= 1.0.0 - 30 Gen 2014 =
+= 1.0.0 - 22 April 2014 =
 * Initial Release
 

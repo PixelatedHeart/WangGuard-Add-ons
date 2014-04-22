@@ -3,7 +3,7 @@ Contributors: j.conti
 Author URI: http://wangguard.com
 Tags: wangguard, wgg, wangguardaddon, registration, notice, registration notice, buddypress
 Requires at least: 3.8
-Tested up to: 3.8
+Tested up to: 3.9
 Stable tag: 1.0.0
 License: GPLv2
 
@@ -37,9 +37,13 @@ No screenshots
 
 == Frequently Asked Questions ==
 
+= How to use it? =
+
+It's easy, go to WangGuard -> WangGuard settings and add you Notice.
+
 
 == Changelog ==
 
-= 1.0.0 - 30 Gen 2014 =
+= 1.0.0 - 22 April 2014 =
 * Initial Release
 

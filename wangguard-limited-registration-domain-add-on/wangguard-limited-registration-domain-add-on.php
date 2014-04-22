@@ -48,15 +48,15 @@ register_activation_hook( 'wangguard-limited-registration-domain-add-on/wangguar
 function wangguard_limit_domain_regisration_notices() {
 	if ( !defined('WANGGUARD_VERSION') ) {
 		echo "
-		<div  class='error fade'><p><strong>".__('WangGuard Limited Registration Domain Add-On is almost ready.', 'wangguard-registration-add-on')."</strong> ". __('You must install and activate <a href="http://wordpress.org/extend/plugins/wangguard/">WangGuard</a> 1.6 or higher to use this plugin.', 'wangguard-registration-add-on')."</p></div>
+		<div  class='error fade'><p><strong>".__('WangGuard Limited Registration Domain Add-On is almost ready.', 'wangguard-registration-add-on')."</strong> ". __('You must install and activate <a href="http://wordpress.org/extend/plugins/wangguard/">WangGuard</a> 1.6-RC1 or higher to use this plugin.', 'wangguard-registration-add-on')."</p></div>
 		";
 	}
 	else {
 		if ( defined('WANGGUARD_VERSION') ) {$version = WANGGUARD_VERSION;}
 		if ($version)
-		if (version_compare($version , '1.6') == -1)
+		if (version_compare($version , '1.6-RC1') == -1)
 			echo "
-			<div  class='error fade'><p><strong>".__('WangGuard Limited Registration Domain Add-On is almost ready.', 'wangguard-registration-add-on')."</strong> ". __('You need to upgrade <a href="http://wordpress.org/extend/plugins/wangguard/">WangGuard</a> to version 1.6 or higher to use this plugin.', 'wangguard-registration-add-on')."</p></div>
+			<div  class='error fade'><p><strong>".__('WangGuard Limited Registration Domain Add-On is almost ready.', 'wangguard-registration-add-on')."</strong> ". __('You need to upgrade <a href="http://wordpress.org/extend/plugins/wangguard/">WangGuard</a> to version 1.6-RC1 or higher to use this plugin.', 'wangguard-registration-add-on')."</p></div>
 			";
 	}
 }

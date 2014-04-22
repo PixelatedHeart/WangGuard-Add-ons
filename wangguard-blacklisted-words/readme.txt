@@ -11,7 +11,9 @@ WangGuard Blacklisted Words is an Add-on for WangGuard plugin. You can blacklist
 
 == Description ==
 
-WangGuard Blacklisted Words is an Add-on for WangGuard plugin. You can blacklist words and they may not be used in Usernames, emails, Names, Site titles, Site urls, Post content, etc. It is compatible with WordPress, WordPress Multisite, BuddyPress and WooCommerce.
+WangGuard Blacklisted Words is an Add-on for WangGuard plugin. You can blacklist words and they may not be used in Usernames, emails, Names, Site titles, Site urls, Post content, etc. If a blacklisted word is used in a post, this WangGuard add-on will email you the URL.
+
+It is compatible with WordPress, WordPress Multisite, BuddyPress and WooCommerce.
 [WangGuard plugin](http://wordpress.org/extend/plugins/wangguard) version 1.6+ is needed
 
 
@@ -31,9 +33,12 @@ No screenshots
 
 == Frequently Asked Questions ==
 
+= How to use it? =
+
+It's easy, go to WangGuard -> WangGuard settings and add you Blacklisted Words.
 
 == Changelog ==
 
-= 1.0.0 - 30 Gen 2014 =
+= 1.0.0 - 22 April 2014 =
 * Initial Release
 
