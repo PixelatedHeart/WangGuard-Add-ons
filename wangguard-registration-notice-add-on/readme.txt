@@ -1,13 +1,13 @@
-=== WangGuard Registration Nocice Add-on ===
+=== WangGuard Registration Notice Add-on ===
 Contributors: j.conti
 Author URI: http://wangguard.com
-Tags: wangguard, wgg, wangguardaddon, registration, notice, registration notice, buddypress
+Tags: wgg, wangguardaddon, registration, notice, registration notice, buddypress
 Requires at least: 3.8
 Tested up to: 3.9
 Stable tag: 1.0.0
 License: GPLv2
 
-WangGuard Registration Nocice Add-on is an Add-on for WangGuard plugin. You can add a Notice in the registration page.
+WangGuard Registration Notice Add-on is an Add-on for WangGuard plugin. You can add a Notice in the registration page.
 
 
 == Description ==
