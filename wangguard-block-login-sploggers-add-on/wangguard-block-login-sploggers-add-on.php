@@ -2,7 +2,7 @@
 /*
 Plugin Name: WangGuard Block login Sploggers Add-On
 Plugin URI: http://www.wangguard.com
-Description: Limit registration to certains domains or block certains domains . WangGuard plugin version 1.6 or higher is required, download it for free from <a href="http://wordpress.org/extend/plugins/wangguard/">http://wordpress.org/extend/plugins/wangguard/</a>.
+Description: Block login to sploggers detected in a WordPress non multisite. If you use WangGuard plugins and WordPress non multisite, this is a must have WangGuard add-on.
 Version: 1.0.0
 Author: WangGuard
 Author URI: http://www.wangguard.com
@@ -56,7 +56,7 @@ add_action('admin_notices', 'wangguard_block_login_sploggers_notices');
 
 
 //Check user status
-function wangguard_look_user_status($userid){
+function wangguard_block_login_sploggers_look_user_status($userid){
 			global $wpdb;
 
 			$table_name = $wpdb->base_prefix . "wangguarduserstatus";
@@ -72,17 +72,17 @@ function wangguard_look_user_status($userid){
 /*** CHECK SPLOGGER USER IN THE WORDPRESS LOGIN FORM BEGINS **/
 /********************************************************************/
 
-function wangguard_check_user_login( $user, $username, $password ) {    
+function wangguard_block_login_sploggers_check_user_login( $user, $username, $password ) {    
     
     $user = get_user_by( 'login', $username );
     $userid = $user->ID;
-    if ($userid) $status = wangguard_look_user_status($userid);
+    if ($userid) $status = wangguard_block_login_sploggers_look_user_status($userid);
     
     if ( $status == 'reported' ) {
         return new WP_Error(1, 'You are not allowed to login.<br />Contact with the webmaster');
     }
     return $user;
 }
-add_filter( 'authenticate', 'wangguard_check_user_login', 30, 3 );
+add_filter( 'authenticate', 'wangguard_block_login_sploggers_check_user_login', 30, 3 );
 
 ?>
