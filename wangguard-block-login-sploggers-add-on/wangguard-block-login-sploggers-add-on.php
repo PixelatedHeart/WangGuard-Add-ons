@@ -62,7 +62,7 @@ function wangguard_block_login_sploggers_look_user_status($userid){
 			$table_name = $wpdb->base_prefix . "wangguarduserstatus";
 			$status = $wpdb->get_var( $wpdb->prepare("select user_status from $table_name where ID = %d" , $userid) );
 			
-			return $status;
+			if ( $status ) return $status;
                     
 }
 
